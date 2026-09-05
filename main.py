@@ -2,17 +2,20 @@ courses = [
     {
         "name": "Data Structures",
         "category": "Computer Science",
-        "difficulty": "Intermediate"
+        "difficulty": "Intermediate",
+        "keywords": ["data structures", "algorithms", "programming", "computer science"]
     },
     {
         "name": "Machine Learning",
         "category": "Artificial Intelligence",
-        "difficulty": "Advanced"
+        "difficulty": "Advanced",
+        "keywords": ["ai", "machine learning", "data", "python"]
     },
     {
         "name": "Python Programming",
         "category": "Computer Science",
-        "difficulty": "Beginner"
+        "difficulty": "Beginner",
+        "keywords": ["python", "programming", "coding", "beginner"]
     }
 ]
 for c in courses:
@@ -35,41 +38,31 @@ print("Courses matching your difficulty:")
 for c in courses:
     if c["difficulty"].lower() == difficulty.lower():
         print("-", c["name"])
-if "ai" in interest.lower() or "ai" in career_goal.lower():
-    print("You are interested in AI!")
+        print("Courses matching your interest:")
 
-    if "bait" in major.lower():
-        print("Since you are a BAIT student, I recommend building your CS foundation first.")
-        courses = [
-        "Data Structures",
-        "Introduction to Artificial Intelligence",
-        "Machine Learning",
-        "Linear Algebra"
-    ]
-    else:
-        courses = [
-        "Introduction to Artificial Intelligence",
-        "Machine Learning",
-        "Python Programming"
-    ]
+scored_courses = []
 
-    print("Recommended Courses:")
+for c in courses:
+    score = 0
 
-    for course in courses:
-        print("-", course)
-elif "data" in interest.lower() or "data" in career_goal.lower():
-    print("You are interested in Data Science!")
+    if interest.lower() in c["keywords"]:
+        score = score + 1
 
-    courses = [
-        "Introduction to Data Science",
-        "Statistics",
-        "Python Programming",
-        "Database Management"
-    ]
+    if c["difficulty"].lower() == difficulty.lower():
+        score = score + 1
 
-    print("Recommended Courses:")
+    for keyword in c["keywords"]:
+        if keyword in career_goal.lower():
+            score = score + 1
+            break
 
-    for course in courses:
-        print("-", course)
-else:
-    print("Sorry, I don't have a recommendation for that interest yet.")
+    scored_courses.append({
+        "name": c["name"],
+        "score": score
+    })
+scored_courses.sort(key=lambda x: x["score"], reverse=True)
+
+print("Top Recommendations:")
+
+for course in scored_courses[:3]:
+    print("-", course["name"], "Score:", course["score"])
