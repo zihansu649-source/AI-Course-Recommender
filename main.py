@@ -5,21 +5,41 @@ interest = input("What are you interested in? ")
 print("Your interest is:", interest)
 career_goal = input("What is your career goal? ")
 print("Your career goal is:", career_goal)
-if "ai" in interest.lower():
+if "ai" in interest.lower() or "ai" in career_goal.lower():
     print("You are interested in AI!")
-    courses = [
+
+    if "bait" in major.lower():
+        print("Since you are a BAIT student, I recommend building your CS foundation first.")
+        courses = [
         "Data Structures",
         "Introduction to Artificial Intelligence",
         "Machine Learning",
         "Linear Algebra"
+    ]
+    else:
+        courses = [
+        "Introduction to Artificial Intelligence",
+        "Machine Learning",
+        "Python Programming"
     ]
 
     print("Recommended Courses:")
 
     for course in courses:
         print("-", course)
-elif "data" in interest.lower():
+elif "data" in interest.lower() or "data" in career_goal.lower():
     print("You are interested in Data Science!")
-    print("Recommended course: Introduction to Data Science")
+
+    courses = [
+        "Introduction to Data Science",
+        "Statistics",
+        "Python Programming",
+        "Database Management"
+    ]
+
+    print("Recommended Courses:")
+
+    for course in courses:
+        print("-", course)
 else:
     print("Sorry, I don't have a recommendation for that interest yet.")
